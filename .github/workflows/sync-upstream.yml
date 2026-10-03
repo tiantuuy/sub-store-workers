@@ -303,7 +303,13 @@ jobs:
         run: |
           TITLE=$(printf 'Sub-Store %%E5%%B7%%B2%%E6%%9B%%B4%%E6%%96%%B0' | sed 's/%%/%/g')
           curl -s "https://api.day.app/${BARK_KEY}/Sub-Store%20${{ steps.upstream.outputs.version }}/Workers%20%2B%20Pages%20deployed"
-
+      - name: Delete Workflow Runs
+        uses: Mattraks/delete-workflow-runs@v2.1.0
+        with:
+         token: ${{ secrets.GITHUB_TOKEN }}
+         repository: ${{ github.repository }}
+         retain_days: 1
+         keep_minimum_runs: 0
       - name: Bark notify failure
         if: failure() && env.BARK_KEY != ''
         env:
@@ -315,3 +321,4 @@ jobs:
           TITLE="Sub-Store%20Sync%20Failed%20${VER}"
           BODY=$(printf '%s' "${RUN_URL}" | sed 's/:/%3A/g; s|/|%2F|g')
           curl -s "https://api.day.app/${BARK_KEY}/${TITLE}/${BODY}"
+       
