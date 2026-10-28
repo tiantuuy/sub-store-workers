@@ -26,13 +26,13 @@ jobs:
 
     steps:
       - name: Checkout sub-store-workers
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: sub-store-workers
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout Sub-Store (upstream)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: sub-store-org/Sub-Store
           path: Sub-Store
@@ -306,7 +306,6 @@ jobs:
       - name: Delete Workflow Runs
         uses: Mattraks/delete-workflow-runs@v2.1.0
         with:
-         token: ${{ secrets.GITHUB_TOKEN }}
          repository: ${{ github.repository }}
          retain_days: 1
          keep_minimum_runs: 0
