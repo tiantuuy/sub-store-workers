@@ -305,6 +305,8 @@ jobs:
           curl -s "https://api.day.app/${BARK_KEY}/Sub-Store%20${{ steps.upstream.outputs.version }}/Workers%20%2B%20Pages%20deployed"
       - name: Delete Workflow Runs
         uses: Mattraks/delete-workflow-runs@v2.1.0
+        env:
+          token: ${{ secrets.GITHUB_TOKEN }}
         with:
          repository: ${{ github.repository }}
          retain_days: 1
